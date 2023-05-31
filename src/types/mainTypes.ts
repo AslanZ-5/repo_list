@@ -39,3 +39,9 @@ export interface stargazersT {
     __typename: string;
     totalCount:number
 }
+
+export interface PageInfoT {
+    __typename:string;
+    endCursor: string;
+    startCursor: string
+}

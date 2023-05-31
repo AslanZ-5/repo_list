@@ -1,11 +1,12 @@
 import {  gql} from '@apollo/client';
 
 export const GET_REPOSITORIES =gql`
-query SearchRepositories($userQuery: String!) {
-  search(query: $userQuery, type: REPOSITORY, first: 10) {
+query SearchRepositories($userQuery: String!, $after: String) {
+  search(query: $userQuery, type: REPOSITORY, first: 10, after: $after) {
     pageInfo{
         endCursor
         startCursor
+        hasNextPage
        }
     edges {
       node {
@@ -68,19 +69,42 @@ export const get_all_queries = gql`query{
     }
   }`
 
-export const GET_CURRENT_USER_REPOS = gql`{
+export const GET_CURRENT_USER_REPOS = gql`query currentRepo($after: String){
   viewer {
-    repositories(first: 100, affiliations: [OWNER, COLLABORATOR, ORGANIZATION_MEMBER]) {
+    repositories(first: 10, affiliations: [OWNER, COLLABORATOR, ORGANIZATION_MEMBER], after: $after) {
       totalCount
       pageInfo {
         endCursor
+        startCursor
         hasNextPage
       }
       nodes{
-        name
-          owner {
-            login
+        id
+          url
+          description
+          name
+          stargazers {
+            totalCount
           }
+          owner {
+            avatarUrl
+          }
+          defaultBranchRef{
+            target{
+             ... on Commit{
+              history(first:1){
+               
+               edges{
+                node{
+                 ... on Commit{
+                  committedDate
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
         }
       }
    }
