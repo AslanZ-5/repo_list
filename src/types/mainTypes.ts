@@ -43,5 +43,8 @@ export interface stargazersT {
 export interface PageInfoT {
     __typename:string;
     endCursor: string;
-    startCursor: string
+    startCursor: string;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean
+
 }

@@ -10,6 +10,7 @@ import classes from './RepoList.module.scss'
 type passingVarT = {
   userQuery?: string,
   after?: null | string
+  before?: null | string
 }
 
 const RepoList = () => {
@@ -20,7 +21,7 @@ const RepoList = () => {
   // const { loading, error, data } = useQuery(GET_REPOSITORIES);
   const repositryQuery = delayedQuery? GET_REPOSITORIES : GET_CURRENT_USER_REPOS
   const passingVar:{variables:passingVarT} = {
-    variables: { userQuery: delayedQuery, after: null }
+    variables: { userQuery: delayedQuery, after: null, before: null }
   }
   const [
     getRepositories,
@@ -36,7 +37,7 @@ const RepoList = () => {
   
 
    if (loading) return <p>Loading ...</p>;
-  console.log('$$$$$$$$$$$*',dataArr2)
+  console.log('$$$$$$$$$$$*',data)
   // if (error) return <p>Error : {error.message}</p>;
   return <div>
     <h1>repositories:</h1>
@@ -45,11 +46,17 @@ const RepoList = () => {
         return <RepoItem key={repo.id} repo={repo}/>
       })}
     </ul>
-    <button onClick={() => {
+    <button  onClick={() => {
       getRepositories({
-        variables: { userQuery: delayedQuery, after: pageinfo.endCursor }
+        variables: { userQuery: delayedQuery,before: pageinfo.startCursor   }
       })
-    }}>more</button>
+    }}>&#x2190; before</button>
+    <button  onClick={() => {
+      getRepositories({
+        variables: { userQuery: delayedQuery, after: pageinfo.endCursor}
+      })
+    }}> &#x2192; after</button>
+    
   </div>
 }
 
