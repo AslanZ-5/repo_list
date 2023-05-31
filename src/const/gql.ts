@@ -67,3 +67,21 @@ export const get_all_queries = gql`query{
       }
     }
   }`
+
+export const GET_CURRENT_USER_REPOS = gql`{
+  viewer {
+    repositories(first: 100, affiliations: [OWNER, COLLABORATOR, ORGANIZATION_MEMBER]) {
+      totalCount
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+      nodes{
+        name
+          owner {
+            login
+          }
+        }
+      }
+   }
+ }`
