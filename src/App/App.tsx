@@ -17,11 +17,6 @@ function App() {
         <Route path={repoDetails} element={<RepoDetails />} />
       </Routes>
     </Router>
-   
-    
-   
-    
-
     </>
   )
 }

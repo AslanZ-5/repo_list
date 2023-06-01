@@ -85,6 +85,7 @@ export const GET_CURRENT_USER_REPOS = gql`query currentRepo($after: String, $bef
           url
           description
           name
+         
           stargazers {
             totalCount
           }
@@ -119,6 +120,13 @@ export const GET_CURRENT_USER_REPOS = gql`query currentRepo($after: String, $bef
     id
     url
     description
+    languages(first:5){
+      edges{
+        node{
+          name
+        }
+      }
+    }
     name
     stargazers {
       totalCount

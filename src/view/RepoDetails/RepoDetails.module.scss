@@ -1,3 +1,42 @@
-.avatar{
-    width:100px
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(202, 193, 243);
 }
+.owner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.avatar{
+    width:100px;
+    border-radius: 50% 50%;
+}
+.nick{
+    color: gray
+}
+.details{
+    border: 1px solid gray;
+    width: 800px;
+    padding-left: 30px;
+}
+.head{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+.stars{
+    position: relative;
+    top:25px;
+    font-size: 25px;
+    font-weight: 900;
+    color:rgb(25, 148, 185)
+    
+}
+.desc{
+    display: flex;
+    justify-content:space-between;
+    margin-right:40px
+}
+.name{}
